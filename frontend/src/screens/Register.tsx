@@ -66,7 +66,7 @@ const Register: React.FC = () => {
       history.push('/login');
     } else {
       const data = await res.json();
-      setMessage(data.error || 'Falha no cadastro');
+      setMessage(data[0].message || 'Falha no cadastro');
     }
   };
 

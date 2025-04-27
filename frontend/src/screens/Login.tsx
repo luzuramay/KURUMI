@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { useHistory, Link } from "react-router-dom";
+import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
 import Navbar from "../components/Navbar";
 
 const Login: React.FC = () => {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [message, setMessage] = useState("");
+	const [showPassword, setShowPassword] = useState(false);
 	const history = useHistory();
 
 	const handleSubmit = async (e: React.FormEvent) => {
@@ -44,15 +46,28 @@ const Login: React.FC = () => {
 					autoComplete="email"
 					required
 				/>
-				<input
-					className="w-full p-2 mb-6 rounded bg-gray-800 border border-gray-600 placeholder-gray-400 text-white"
-					type="password"
-					placeholder="Senha"
-					value={password}
-					onChange={(e) => setPassword(e.target.value)}
-					autoComplete="current-password"
-					required
-				/>
+				<div className="relative mb-6">
+					<input
+						className="w-full p-2 rounded bg-gray-800 border border-gray-600 placeholder-gray-400 text-white"
+						type={showPassword ? "text" : "password"}
+						placeholder="Senha"
+						value={password}
+						onChange={(e) => setPassword(e.target.value)}
+						autoComplete="current-password"
+						required
+					/>
+					<button
+						type="button"
+						className="absolute inset-y-0 right-0 flex items-center pr-3"
+						onClick={() => setShowPassword(!showPassword)}
+					>
+						{showPassword ? (
+							<EyeSlashIcon className="h-5 w-5 text-gray-400" />
+						) : (
+							<EyeIcon className="h-5 w-5 text-gray-400" />
+						)}
+					</button>
+				</div>
 				<button
 					type="submit"
 					className="w-full bg-red-800 hover:bg-red-700 text-white py-2 rounded"

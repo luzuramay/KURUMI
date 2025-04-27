@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory, Link } from 'react-router-dom';
 import Navbar from '../components/Navbar';
+import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
 
 interface Address {
   street: string;
@@ -95,23 +96,50 @@ const Register: React.FC = () => {
           autoComplete="email"
           required
         />
-        <input
-          className="w-full p-2 mb-4 rounded bg-gray-800 border border-gray-600 placeholder-gray-400 text-white"
-          type="password"
-          placeholder="Senha"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          autoComplete="new-password"
-          required
-        />
-        <input
-          className="w-full p-2 mb-4 rounded bg-gray-800 border border-gray-600 placeholder-gray-400 text-white"
-          type="password"
-          placeholder="Confirmar Senha"
-          value={confirmPassword}
-          onChange={(e) => setConfirmPassword(e.target.value)}
-          required
-        />
+        <div className="relative">
+          <input
+            className="w-full p-2 mb-4 rounded bg-gray-800 border border-gray-600 placeholder-gray-400 text-white"
+            type={showPassword ? "text" : "password"}
+            placeholder="Senha"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            autoComplete="new-password"
+            required
+          />
+          <button
+            type="button"
+            className="absolute right-3 top-2.5"
+            onClick={() => setShowPassword(!showPassword)}
+          >
+            {showPassword ? (
+              <EyeSlashIcon className="h-5 w-5 text-gray-400" />
+            ) : (
+              <EyeIcon className="h-5 w-5 text-gray-400" />
+            )}
+          </button>
+        </div>
+        <div className="relative">
+          <input
+            className="w-full p-2 mb-4 rounded bg-gray-800 border border-gray-600 placeholder-gray-400 text-white"
+            type={showConfirmPassword ? "text" : "password"}
+            placeholder="Confirmar Senha"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+            required
+          />
+          <button
+            type="button"
+            className="absolute right-3 top-2.5"
+            onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+          >
+            {showConfirmPassword ? (
+              <EyeSlashIcon className="h-5 w-5 text-gray-400" />
+            ) : (
+              <EyeIcon className="h-5 w-5 text-gray-400" />
+            )}
+          </button>
+        </div>
+        
         <input
           className="w-full p-2 mb-4 rounded bg-gray-800 border border-gray-600 placeholder-gray-400 text-white"
           type="text"

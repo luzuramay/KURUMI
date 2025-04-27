@@ -15,6 +15,8 @@ const Register: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [cep, setCep] = useState('');
   const [address, setAddress] = useState<Address>({ street: '', neighborhood: '', city: '', state: '' });
   const [message, setMessage] = useState('');

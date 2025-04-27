@@ -48,7 +48,7 @@ const Register: React.FC = () => {
       setMessage('As senhas não coincidem');
       return;
     }
-    const res = await fetch('/cadastro', {
+    const res = await fetch('http://localhost:3000/users', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({

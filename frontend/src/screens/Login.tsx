@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useHistory, Link } from "react-router-dom";
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
+import googleIcon from "../assets/google.png";
+import Api from "../Api";
 import Navbar from "../components/Navbar";
 
 const Login: React.FC = () => {
@@ -22,6 +24,20 @@ const Login: React.FC = () => {
 		} else {
 			const data = await res.json();
 			setMessage(data.message || "Falha no login");
+		}
+	};
+
+	const actionLoginGoogle = async () => {
+		try {
+			const result = await Api.googleLogar();
+			if (result?.user) {
+				history.push("/game");
+			} else {
+				setMessage("Erro ao fazer login com o Google");
+			}
+		} catch (error) {
+			console.error(error);
+			setMessage("Erro ao fazer login com o Google");
 		}
 	};
 
@@ -80,6 +96,16 @@ const Login: React.FC = () => {
 						Cadastre-se
 					</Link>
 				</p>
+				<div className="flex justify-center mt-4">
+					<button
+						type="button"
+						className="flex items-center justify-center p-2 rounded bg-white hover:bg-gray-100 transition-colors"
+						onClick={actionLoginGoogle}
+					>
+						<img src={googleIcon} alt="Google Login" className="h-6 w-6" />
+						<span className="ml-2 text-gray-700">Entrar com Google</span>
+					</button>
+				</div>
 			</form>
 		</div>
 	);
